@@ -1,0 +1,683 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: #f5f8fa;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-wrapper {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-card {
+    background: #fff;
+    padding: 2.5rem 2rem 2rem;
+    border-radius: 16px;
+    box-shadow: 0 6px 24px rgba(40,40,150,0.1);
+    max-width: 350px;
+    width: 90vw;
+    text-align: center;
+}
+.avatar img {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    object-fit: cover;
+}
+h1 {
+    font-size: 2.2rem;
+    margin-bottom: 1.7rem;
+    color: #263159;
+}
+.input-group {
+    display: flex;
+    align-items: center;
+    background: #f2f3f7;
+    border-radius: 8px;
+    margin-bottom: 1.2rem;
+    padding: 0.5rem 1rem;
+}
+.input-icon {
+    font-size: 1.25rem;
+    color: #90a4ae;
+    margin-right: 8px;
+}
+input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 1rem;
+    width: 100%;
+    padding: 0.6rem 0;
+    color: #263159;
+}
+button#loginBtn {
+    width: 100%;
+    background: #3e81fd;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.9rem 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: background 0.2s;
+    margin-top: 0.5rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+button#loginBtn:hover {
+    background: #2851e3;
+}
+#msg {
+    color: #e53935;
+    margin-top: 0.8rem;
+    min-height: 1.5em;
+    font-size: 1rem;
+}
+@media (max-width: 600px) {
+    .login-card {
+        padding: 2rem 1rem 1.5rem;
+        max-width: 95vw;
+        border-radius: 10px;
+    }
+    h1 {
+        font-size: 1.6rem;
+    }
+    .avatar img {
+        width: 56px;
+        height: 56px;
+    }
+}
+/* --- Shop Page Styles --- */
+
+.shop-main {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Existing shop styles... */
+
+/* New Redeem Card Style */
+.redeem-card {
+    background-color: #334e68;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.redeem-card h3 {
+    margin-top: 0;
+    font-size: 20px;
+}
+
+.redeem-card p {
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+.redeem-card button {
+    background-color: white;
+    color: #334e68;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* Remove Ads Button Style */
+.remove-ads-btn {
+    width: 100%;
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+/* --- Quests Page Specific Styles --- */
+.quests-main-content {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.quests-welcome-banner {
+    background-color: #7b4397; /* A purple background similar to the image */
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.banner-text {
+    z-index: 1;
+}
+
+.banner-text h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.banner-text p {
+    margin: 5px 0 0;
+    font-size: 14px;
+}
+
+.daily-quests-section {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.section-header h3 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.section-header .timer {
+    font-size: 14px;
+    color: #999;
+}
+
+.quest-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.quest-card.locked {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.quest-details {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quest-icon {
+    font-size: 24px;
+}
+
+.progress-bar-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+progress {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 150px;
+    height: 10px;
+    border-radius: 5px;
+}
+
+progress::-webkit-progress-bar {
+    background-color: #e0e0e0;
+    border-radius: 5px;
+}
+
+progress::-webkit-progress-value {
+    background-color: #5cb85c;
+    border-radius: 5px;
+}
+
+.quests-right-panel {
+    width: 300px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.monthly-challenges-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.monthly-challenges-card h3 {
+    font-size: 18px;
+    margin-top: 0;
+}
+
+.monthly-challenges-card p {
+    font-size: 14px;
+    color: #666;
+}
+
+.start-lesson-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 15px;
+}
+
+.challenge-image {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    opacity: 0.5;
+}
+
+.quests-links {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    font-size: 12px;
+}
+
+.quests-links a {
+    color: #999;
+    text-decoration: none;
+    margin: 5px;
+}
+/* --- More Page Specific Styles --- */
+.more-page-main {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.more-menu-container {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+}
+
+.more-menu-item {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #555;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.2s;
+}
+
+.more-menu-item:hover {
+    background-color: #f0f0f0;
+}
+
+.more-menu-item:last-child {
+    border-bottom: none;
+}
+
+.more-menu-item .icon {
+    margin-right: 15px;
+    font-size: 20px;
+}
+
+.more-menu-item .text {
+    text-transform: uppercase;
+}
+
+/* ... existing styles ... */
+/* --- Shop Page Styles --- */
+.shop-main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+.shop-banner {
+    background: linear-gradient(135deg, #7b4397, #dc2430);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.super-tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #5cb85c;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.shop-banner h3 {
+    margin: 10px 0;
+    font-size: 24px;
+}
+
+.start-trial-btn {
+    background-color: white;
+    color: #8a2be2;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.shop-section {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.shop-section h2 {
+    margin-top: 0;
+    font-size: 20px;
+}
+
+.shop-item-card {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.shop-item-card:last-child {
+    border-bottom: none;
+}
+
+.item-icon img {
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+}
+
+.item-details {
+    flex-grow: 1;
+}
+
+.item-details h4 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.item-details p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.item-action-btn {
+    background-color: #f0f0f0;
+    color: #666;
+    border: 1px solid #ccc;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.item-action-btn.refill {
+    background-color: #d1d1d1;
+    color: #444;
+}
+
+.item-action-btn.trial {
+    background-color: transparent;
+    border: 1px solid #8a2be2;
+    color: #8a2be2;
+}
+
+.item-buy {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.buy-btn {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cost {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Right Panel Styles (Shop Page) */
+.shop-right-panel {
+    width: 300px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.leaderboard-card,
+.daily-quests-card,
+.redeem-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+}
+
+.leaderboard-card strong {
+    font-size: 18px;
+    display: block;
+    margin-top: 10px;
+}
+
+.daily-quests-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.daily-quests-card .view-all {
+    font-size: 12px;
+    font-weight: bold;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.daily-quests-card .quest-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.redeem-card {
+    background-color: #334e68;
+    color: white;
+    text-align: center;
+}
+
+.redeem-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.redeem-card p {
+    font-size: 14px;
+    margin: 0;
+}
+
+.redeem-action a {
+    display: inline-block;
+    background-color: white;
+    color: #334e68;
+    padding: 12px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.remove-ads-btn {
+    width: 100%;
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    font-size: 12px;
+}
+
+.footer-links a {
+    color: #999;
+    text-decoration: none;
+}
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ... other sidebar styles ... */
+
+.sidebar nav li a {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    text-decoration: none; /* This line removes the underline */
+    color: #555;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.sidebar nav li a:hover {
+    background-color: #e0f0e0;
+}
+
+.sidebar nav li a span {
+    margin-right: 15px;
+    font-size: 20px;
+}
+
+.sidebar nav li.active a {
+    background-color: #e0f0e0;
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+/* ... rest of your CSS ... */
+/* Add this new section at the end of your dashboard.css file */
+
+.ai-question-section {
+    background-color: #f0f4ff; /* Light blue background for the question */
+    border-left: 4px solid #3777f0; /* Blue accent bar on the left */
+    padding: 10px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.ai-question-section h4 {
+    margin: 0 0 5px 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.ai-question-section p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.generate-ai-btn {
+    background: #58cc02;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: background 0.2s ease;
+}
+
+.generate-ai-btn:hover {
+    background: #46a400;
+}

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Multiple-Choice Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        input[type="radio"] {
+            accent-color: #58cc02;
+        }
+        .container-padding {
+            padding: 2.5rem;
+        }
+        @media (min-width: 768px) {
+            .container-padding {
+                padding: 4rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+    <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl w-full max-w-3xl container-padding">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center">Physics Multiple-Choice Questions</h1>
+        <form id="quizForm" onsubmit="submitQuiz(event)">
+            <!-- Question 1 -->
+            <div class="bg-gray-50 p-6 rounded-lg mb-6 border-l-4 border-lime-500">
+                <p class="text-lg font-semibold text-gray-700 mb-4">1. Which of the following is the best definition of an insulator?</p>
+                <div class="space-y-3">
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q1" value="A" class="form-radio h-5 w-5">
+                        <span>A. A material that allows heat to pass through it easily.</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q1" value="B" class="form-radio h-5 w-5">
+                        <span>B. A material that does not allow electric current to flow easily.</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q1" value="C" class="form-radio h-5 w-5">
+                        <span>C. A material that has a high density.</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q1" value="D" class="form-radio h-5 w-5">
+                        <span>D. A material that is magnetic.</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="bg-gray-50 p-6 rounded-lg mb-6 border-l-4 border-lime-500">
+                <p class="text-lg font-semibold text-gray-700 mb-4">2. What is the formula for calculating kinetic energy?</p>
+                <div class="space-y-3">
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q2" value="A" class="form-radio h-5 w-5">
+                        <span>A. $E_k = mgh$</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q2" value="B" class="form-radio h-5 w-5">
+                        <span>B. $E_k = 1/2mv^2$</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q2" value="C" class="form-radio h-5 w-5">
+                        <span>C. $E_k = Fd$</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q2" value="D" class="form-radio h-5 w-5">
+                        <span>D. $E_k = P/t$</span>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Question 3 -->
+            <div class="bg-gray-50 p-6 rounded-lg mb-6 border-l-4 border-lime-500">
+                <p class="text-lg font-semibold text-gray-700 mb-4">3. In a circuit, what does a resistor do?</p>
+                <div class="space-y-3">
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q3" value="A" class="form-radio h-5 w-5">
+                        <span>A. Increases voltage.</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q3" value="B" class="form-radio h-5 w-5">
+                        <span>B. Stores electrical energy.</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q3" value="C" class="form-radio h-5 w-5">
+                        <span>C. Regulates the flow of electric current.</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q3" value="D" class="form-radio h-5 w-5">
+                        <span>D. Converts electrical energy into light.</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="bg-gray-50 p-6 rounded-lg mb-6 border-l-4 border-lime-500">
+                <p class="text-lg font-semibold text-gray-700 mb-4">4. According to the Law of Conservation of Energy, energy can be:</p>
+                <div class="space-y-3">
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q4" value="A" class="form-radio h-5 w-5">
+                        <span>A. Created but not destroyed.</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q4" value="B" class="form-radio h-5 w-5">
+                        <span>B. Destroyed but not created.</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q4" value="C" class="form-radio h-5 w-5">
+                        <span>C. Converted from one form to another.</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q4" value="D" class="form-radio h-5 w-5">
+                        <span>D. Stored indefinitely without loss.</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="bg-gray-50 p-6 rounded-lg mb-6 border-l-4 border-lime-500">
+                <p class="text-lg font-semibold text-gray-700 mb-4">5. Which of the following describes the difference between weight and mass?</p>
+                <div class="space-y-3">
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q5" value="A" class="form-radio h-5 w-5">
+                        <span>A. Mass is a vector quantity, while weight is a scalar quantity.</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q5" value="B" class="form-radio h-5 w-5">
+                        <span>B. Mass is the amount of matter, while weight is the force of gravity on that matter.</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q5" value="C" class="form-radio h-5 w-5">
+                        <span>C. Mass is measured in Newtons (N), and weight is measured in kilograms (kg).</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q5" value="D" class="form-radio h-5 w-5">
+                        <span>D. Weight remains constant regardless of location, while mass changes.</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="bg-gray-50 p-6 rounded-lg mb-6 border-l-4 border-lime-500">
+                <p class="text-lg font-semibold text-gray-700 mb-4">6. What is the name of the electromagnetic wave with the shortest wavelength?</p>
+                <div class="space-y-3">
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q6" value="A" class="form-radio h-5 w-5">
+                        <span>A. Radio waves</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q6" value="B" class="form-radio h-5 w-5">
+                        <span>B. X-rays</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q6" value="C" class="form-radio h-5 w-5">
+                        <span>C. Microwaves</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q6" value="D" class="form-radio h-5 w-5">
+                        <span>D. Gamma rays</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="bg-gray-50 p-6 rounded-lg mb-6 border-l-4 border-lime-500">
+                <p class="text-lg font-semibold text-gray-700 mb-4">7. If you push an object with a force of 20 N and it accelerates at 5 $m/s^2$, what is its mass?</p>
+                <div class="space-y-3">
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q7" value="A" class="form-radio h-5 w-5">
+                        <span>A. 100 kg</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q7" value="B" class="form-radio h-5 w-5">
+                        <span>B. 4 kg</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q7" value="C" class="form-radio h-5 w-5">
+                        <span>C. 0.25 kg</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q7" value="D" class="form-radio h-5 w-5">
+                        <span>D. 25 kg</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="bg-gray-50 p-6 rounded-lg mb-6 border-l-4 border-lime-500">
+                <p class="text-lg font-semibold text-gray-700 mb-4">8. What phenomenon explains why a pencil in a glass of water appears to be bent?</p>
+                <div class="space-y-3">
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q8" value="A" class="form-radio h-5 w-5">
+                        <span>A. Reflection</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q8" value="B" class="form-radio h-5 w-5">
+                        <span>B. Diffraction</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q8" value="C" class="form-radio h-5 w-5">
+                        <span>C. Refraction</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q8" value="D" class="form-radio h-5 w-5">
+                        <span>D. Interference</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Question 9 -->
+            <div class="bg-gray-50 p-6 rounded-lg mb-6 border-l-4 border-lime-500">
+                <p class="text-lg font-semibold text-gray-700 mb-4">9. Which type of energy is stored in a compressed spring?</p>
+                <div class="space-y-3">
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q9" value="A" class="form-radio h-5 w-5">
+                        <span>A. Chemical potential energy</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q9" value="B" class="form-radio h-5 w-5">
+                        <span>B. Gravitational potential energy</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q9" value="C" class="form-radio h-5 w-5">
+                        <span>C. Elastic potential energy</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q9" value="D" class="form-radio h-5 w-5">
+                        <span>D. Kinetic energy</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Question 10 -->
+            <div class="bg-gray-50 p-6 rounded-lg mb-6 border-l-4 border-lime-500">
+                <p class="text-lg font-semibold text-gray-700 mb-4">10. The unit of power is the:</p>
+                <div class="space-y-3">
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q10" value="A" class="form-radio h-5 w-5">
+                        <span>A. Joule (J)</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q10" value="B" class="form-radio h-5 w-5">
+                        <span>B. Watt (W)</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q10" value="C" class="form-radio h-5 w-5">
+                        <span>C. Newton (N)</span>
+                    </label>
+                    <label class="flex items-center space-x-3 text-gray-600">
+                        <input type="radio" name="q10" value="D" class="form-radio h-5 w-5">
+                        <span>D. Coulomb (C)</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="flex justify-center mt-8">
+                <button type="submit" class="bg-lime-500 hover:bg-lime-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+                    Submit Quiz
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function submitQuiz(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+
+            // This is a placeholder. You would add your grading logic here.
+            // For now, it will just show a success message.
+            const quizForm = document.getElementById('quizForm');
+            const allQuestionsAnswered = Array.from(quizForm.elements).filter(el => el.type === 'radio').every(el => el.checked);
+
+            if (allQuestionsAnswered) {
+                alert("Quiz submitted! You can add logic here to check the answers and show a score.");
+            } else {
+                alert("Please answer all questions before submitting.");
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Adaptive AI Tutor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-wrapper">
+        <div class="login-card">
+            <div class="avatar">
+                <img src="https://www.w3schools.com/howto/img_avatar.png" alt="User Avatar">
+            </div>
+            <h1>Login</h1>
+            <form id="loginForm" onsubmit="login(); return false;">
+                <div class="input-group">
+                    <span class="input-icon">&#128100;</span>
+                    <input type="email" id="email" placeholder="Email" required>
+                </div>
+                <div class="input-group">
+                    <span class="input-icon">&#128274;</span>
+                 <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <button type="submit" id="loginBtn">Login</button>
+                <p id="msg"></p>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

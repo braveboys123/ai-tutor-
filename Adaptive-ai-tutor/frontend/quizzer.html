@@ -1,0 +1,1799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple-Choice Quiz App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        input[type="radio"] {
+            accent-color: #58cc02;
+        }
+        .container-padding {
+            padding: 2.5rem;
+        }
+        @media (min-width: 768px) {
+            .container-padding {
+                padding: 4rem;
+            }
+        }
+        .subject-button.active {
+            background-color: #58cc02;
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+    <div class="bg-white p-6 md:p-10 rounded-2xl shadow-xl w-full max-w-4xl container-padding">
+        
+        <!-- Navigation Buttons -->
+        <nav class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8">
+            <button class="subject-button py-2 px-4 rounded-full text-gray-700 bg-gray-200 hover:bg-gray-300 transition duration-300 font-semibold text-sm md:text-base active" onclick="showQuiz('physics')">Physics</button>
+            <button class="subject-button py-2 px-4 rounded-full text-gray-700 bg-gray-200 hover:bg-gray-300 transition duration-300 font-semibold text-sm md:text-base" onclick="showQuiz('math')">Math</button>
+            <button class="subject-button py-2 px-4 rounded-full text-gray-700 bg-gray-200 hover:bg-gray-300 transition duration-300 font-semibold text-sm md:text-base" onclick="showQuiz('chemistry')">Chemistry</button>
+            <button class="subject-button py-2 px-4 rounded-full text-gray-700 bg-gray-200 hover:bg-gray-300 transition duration-300 font-semibold text-sm md:text-base" onclick="showQuiz('biology')">Biology</button>
+            <button class="subject-button py-2 px-4 rounded-full text-gray-700 bg-gray-200 hover:bg-gray-300 transition duration-300 font-semibold text-sm md:text-base" onclick="showQuiz('jee_advance')">JEE Advanced</button>
+            <button class="subject-button py-2 px-4 rounded-full text-gray-700 bg-gray-200 hover:bg-gray-300 transition duration-300 font-semibold text-sm md:text-base" onclick="showQuiz('neet')">NEET</button>
+            <button class="subject-button py-2 px-4 rounded-full text-gray-700 bg-gray-200 hover:bg-gray-300 transition duration-300 font-semibold text-sm md:text-base" onclick="showQuiz('upsc')">UPSC</button>
+        </nav>
+        
+        <h1 id="quiz-title" class="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center">Physics Multiple-Choice Questions</h1>
+        
+        <!-- Quiz Form -->
+        <form id="quizForm" onsubmit="submitQuiz(event)">
+
+            <!-- Physics Quiz Section -->
+            <div id="physics-quiz-section" class="quiz-section space-y-6">
+                <!-- Question 1 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">1. Which of the following is the best definition of an insulator?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q1" value="A" class="form-radio h-5 w-5">
+                            <span>A. A material that allows heat to pass through it easily.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q1" value="B" class="form-radio h-5 w-5">
+                            <span>B. A material that does not allow electric current to flow easily.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q1" value="C" class="form-radio h-5 w-5">
+                            <span>C. A material that has a high density.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q1" value="D" class="form-radio h-5 w-5">
+                            <span>D. A material that is magnetic.</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 2 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">2. What is the formula for calculating kinetic energy?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q2" value="A" class="form-radio h-5 w-5">
+                            <span>A. $E_k = mgh$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q2" value="B" class="form-radio h-5 w-5">
+                            <span>B. $E_k = 1/2mv^2$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q2" value="C" class="form-radio h-5 w-5">
+                            <span>C. $E_k = Fd$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q2" value="D" class="form-radio h-5 w-5">
+                            <span>D. $E_k = P/t$</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 3 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">3. In a circuit, what does a resistor do?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q3" value="A" class="form-radio h-5 w-5">
+                            <span>A. Increases voltage.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q3" value="B" class="form-radio h-5 w-5">
+                            <span>B. Stores electrical energy.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q3" value="C" class="form-radio h-5 w-5">
+                            <span>C. Regulates the flow of electric current.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q3" value="D" class="form-radio h-5 w-5">
+                            <span>D. Converts electrical energy into light.</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 4 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">4. According to the Law of Conservation of Energy, energy can be:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q4" value="A" class="form-radio h-5 w-5">
+                            <span>A. Created but not destroyed.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q4" value="B" class="form-radio h-5 w-5">
+                            <span>B. Destroyed but not created.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q4" value="C" class="form-radio h-5 w-5">
+                            <span>C. Converted from one form to another.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q4" value="D" class="form-radio h-5 w-5">
+                            <span>D. Stored indefinitely without loss.</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 5 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">5. Which of the following describes the difference between weight and mass?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q5" value="A" class="form-radio h-5 w-5">
+                            <span>A. Mass is a vector quantity, while weight is a scalar quantity.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q5" value="B" class="form-radio h-5 w-5">
+                            <span>B. Mass is the amount of matter, while weight is the force of gravity on that matter.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q5" value="C" class="form-radio h-5 w-5">
+                            <span>C. Mass is measured in Newtons (N), and weight is measured in kilograms (kg).</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q5" value="D" class="form-radio h-5 w-5">
+                            <span>D. Weight remains constant regardless of location, while mass changes.</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 6 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">6. What is the name of the electromagnetic wave with the shortest wavelength?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q6" value="A" class="form-radio h-5 w-5">
+                            <span>A. Radio waves</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q6" value="B" class="form-radio h-5 w-5">
+                            <span>B. X-rays</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q6" value="C" class="form-radio h-5 w-5">
+                            <span>C. Microwaves</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q6" value="D" class="form-radio h-5 w-5">
+                            <span>D. Gamma rays</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 7 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">7. If you push an object with a force of 20 N and it accelerates at 5 $m/s^2$, what is its mass?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q7" value="A" class="form-radio h-5 w-5">
+                            <span>A. 100 kg</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q7" value="B" class="form-radio h-5 w-5">
+                            <span>B. 4 kg</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q7" value="C" class="form-radio h-5 w-5">
+                            <span>C. 0.25 kg</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q7" value="D" class="form-radio h-5 w-5">
+                            <span>D. 25 kg</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 8 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">8. What phenomenon explains why a pencil in a glass of water appears to be bent?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q8" value="A" class="form-radio h-5 w-5">
+                            <span>A. Reflection</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q8" value="B" class="form-radio h-5 w-5">
+                            <span>B. Diffraction</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q8" value="C" class="form-radio h-5 w-5">
+                            <span>C. Refraction</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q8" value="D" class="form-radio h-5 w-5">
+                            <span>D. Interference</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 9 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">9. Which type of energy is stored in a compressed spring?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q9" value="A" class="form-radio h-5 w-5">
+                            <span>A. Chemical potential energy</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q9" value="B" class="form-radio h-5 w-5">
+                            <span>B. Gravitational potential energy</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q9" value="C" class="form-radio h-5 w-5">
+                            <span>C. Elastic potential energy</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q9" value="D" class="form-radio h-5 w-5">
+                            <span>D. Kinetic energy</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 10 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">10. The unit of power is the:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q10" value="A" class="form-radio h-5 w-5">
+                            <span>A. Joule (J)</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q10" value="B" class="form-radio h-5 w-5">
+                            <span>B. Watt (W)</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q10" value="C" class="form-radio h-5 w-5">
+                            <span>C. Newton (N)</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q10" value="D" class="form-radio h-5 w-5">
+                            <span>D. Coulomb (C)</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Math Quiz Section (Hidden by default) -->
+            <div id="math-quiz-section" class="quiz-section space-y-6 hidden">
+                <!-- Question 1 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">1. What is the derivative of $f(x) = \sin(x)$?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q1" value="A" class="form-radio h-5 w-5">
+                            <span>A. $\cos(x)$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q1" value="B" class="form-radio h-5 w-5">
+                            <span>B. $-\cos(x)$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q1" value="C" class="form-radio h-5 w-5">
+                            <span>C. $\sin(x)$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q1" value="D" class="form-radio h-5 w-5">
+                            <span>D. $-\sin(x)$</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 2 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">2. What is the value of $\pi$ to two decimal places?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q2" value="A" class="form-radio h-5 w-5">
+                            <span>A. 3.14</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q2" value="B" class="form-radio h-5 w-5">
+                            <span>B. 3.15</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q2" value="C" class="form-radio h-5 w-5">
+                            <span>C. 3.16</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q2" value="D" class="form-radio h-5 w-5">
+                            <span>D. 3.10</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 3 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">3. Solve for x: $2x + 5 = 15$.</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q3" value="A" class="form-radio h-5 w-5">
+                            <span>A. 5</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q3" value="B" class="form-radio h-5 w-5">
+                            <span>B. 10</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q3" value="C" class="form-radio h-5 w-5">
+                            <span>C. 20</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q3" value="D" class="form-radio h-5 w-5">
+                            <span>D. 2</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 4 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">4. What is the area of a circle with radius r?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q4" value="A" class="form-radio h-5 w-5">
+                            <span>A. $\pi r^2$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q4" value="B" class="form-radio h-5 w-5">
+                            <span>B. $2\pi r$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q4" value="C" class="form-radio h-5 w-5">
+                            <span>C. $1/2 \pi r^2$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q4" value="D" class="form-radio h-5 w-5">
+                            <span>D. $\pi d$</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 5 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">5. What is the sum of the angles in a triangle?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q5" value="A" class="form-radio h-5 w-5">
+                            <span>A. 90°</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q5" value="B" class="form-radio h-5 w-5">
+                            <span>B. 180°</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q5" value="C" class="form-radio h-5 w-5">
+                            <span>C. 270°</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q5" value="D" class="form-radio h-5 w-5">
+                            <span>D. 360°</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 6 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">6. The square root of 64 is:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q6" value="A" class="form-radio h-5 w-5">
+                            <span>A. 4</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q6" value="B" class="form-radio h-5 w-5">
+                            <span>B. 6</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q6" value="C" class="form-radio h-5 w-5">
+                            <span>C. 8</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q6" value="D" class="form-radio h-5 w-5">
+                            <span>D. 16</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 7 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">7. Simplify: $3x + 2y + 5x - y$.</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q7" value="A" class="form-radio h-5 w-5">
+                            <span>A. $8x+y$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q7" value="B" class="form-radio h-5 w-5">
+                            <span>B. $8x+3y$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q7" value="C" class="form-radio h-5 w-5">
+                            <span>C. $2x+y$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q7" value="D" class="form-radio h-5 w-5">
+                            <span>D. $8x-y$</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 8 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">8. What is the mode of the set {2, 3, 5, 2, 8, 2, 9}?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q8" value="A" class="form-radio h-5 w-5">
+                            <span>A. 5</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q8" value="B" class="form-radio h-5 w-5">
+                            <span>B. 8</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q8" value="C" class="form-radio h-5 w-5">
+                            <span>C. 2</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q8" value="D" class="form-radio h-5 w-5">
+                            <span>D. 9</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 9 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">9. The circumference of a circle is calculated using the formula:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q9" value="A" class="form-radio h-5 w-5">
+                            <span>A. $\pi r^2$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q9" value="B" class="form-radio h-5 w-5">
+                            <span>B. $2\pi r$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q9" value="C" class="form-radio h-5 w-5">
+                            <span>C. $1/2 r^2$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q9" value="D" class="form-radio h-5 w-5">
+                            <span>D. $\pi d^2$</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 10 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">10. What is a prime number?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q10" value="A" class="form-radio h-5 w-5">
+                            <span>A. A number divisible by 2</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q10" value="B" class="form-radio h-5 w-5">
+                            <span>B. A number with exactly two distinct divisors</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q10" value="C" class="form-radio h-5 w-5">
+                            <span>C. A number greater than 1</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q10" value="D" class="form-radio h-5 w-5">
+                            <span>D. A number ending in 1, 3, 5, 7, or 9</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chemistry Quiz Section (Hidden by default) -->
+            <div id="chemistry-quiz-section" class="quiz-section space-y-6 hidden">
+                <!-- Question 1 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">1. What is the chemical symbol for gold?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q11" value="A" class="form-radio h-5 w-5">
+                            <span>A. Ag</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q11" value="B" class="form-radio h-5 w-5">
+                            <span>B. Au</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q11" value="C" class="form-radio h-5 w-5">
+                            <span>C. Fe</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q11" value="D" class="form-radio h-5 w-5">
+                            <span>D. Pb</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 2 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">2. What is the pH of a neutral solution?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q12" value="A" class="form-radio h-5 w-5">
+                            <span>A. 0</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q12" value="B" class="form-radio h-5 w-5">
+                            <span>B. 7</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q12" value="C" class="form-radio h-5 w-5">
+                            <span>C. 14</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q12" value="D" class="form-radio h-5 w-5">
+                            <span>D. -7</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 3 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">3. Which subatomic particle has a positive charge?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q13" value="A" class="form-radio h-5 w-5">
+                            <span>A. Electron</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q13" value="B" class="form-radio h-5 w-5">
+                            <span>B. Neutron</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q13" value="C" class="form-radio h-5 w-5">
+                            <span>C. Proton</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q13" value="D" class="form-radio h-5 w-5">
+                            <span>D. Photon</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 4 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">4. What is the name of the compound with the formula NaCl?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q14" value="A" class="form-radio h-5 w-5">
+                            <span>A. Sodium chloride</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q14" value="B" class="form-radio h-5 w-5">
+                            <span>B. Sodium chlorine</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q14" value="C" class="form-radio h-5 w-5">
+                            <span>C. Sodium carbonate</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q14" value="D" class="form-radio h-5 w-5">
+                            <span>D. Sodium chlorate</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 5 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">5. The process of a solid turning directly into a gas is called:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q15" value="A" class="form-radio h-5 w-5">
+                            <span>A. Condensation</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q15" value="B" class="form-radio h-5 w-5">
+                            <span>B. Evaporation</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q15" value="C" class="form-radio h-5 w-5">
+                            <span>C. Sublimation</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q15" value="D" class="form-radio h-5 w-5">
+                            <span>D. Melting</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 6 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">6. What is the most abundant gas in Earth's atmosphere?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q16" value="A" class="form-radio h-5 w-5">
+                            <span>A. Oxygen</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q16" value="B" class="form-radio h-5 w-5">
+                            <span>B. Hydrogen</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q16" value="C" class="form-radio h-5 w-5">
+                            <span>C. Carbon Dioxide</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q16" value="D" class="form-radio h-5 w-5">
+                            <span>D. Nitrogen</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 7 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">7. The atomic number of an element is determined by the number of:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q17" value="A" class="form-radio h-5 w-5">
+                            <span>A. Protons</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q17" value="B" class="form-radio h-5 w-5">
+                            <span>B. Neutrons</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q17" value="C" class="form-radio h-5 w-5">
+                            <span>C. Electrons</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q17" value="D" class="form-radio h-5 w-5">
+                            <span>D. Nucleons</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 8 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">8. Which of the following is a noble gas?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q18" value="A" class="form-radio h-5 w-5">
+                            <span>A. Oxygen</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q18" value="B" class="form-radio h-5 w-5">
+                            <span>B. Chlorine</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q18" value="C" class="form-radio h-5 w-5">
+                            <span>C. Neon</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q18" value="D" class="form-radio h-5 w-5">
+                            <span>D. Nitrogen</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 9 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">9. What is an oxidation reaction?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q19" value="A" class="form-radio h-5 w-5">
+                            <span>A. Gain of electrons</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q19" value="B" class="form-radio h-5 w-5">
+                            <span>B. Loss of electrons</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q19" value="C" class="form-radio h-5 w-5">
+                            <span>C. Gain of protons</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q19" value="D" class="form-radio h-5 w-5">
+                            <span>D. Loss of protons</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 10 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">10. What is the molecular formula for water?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q20" value="A" class="form-radio h-5 w-5">
+                            <span>A. $H_2O_2$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q20" value="B" class="form-radio h-5 w-5">
+                            <span>B. $CO_2$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q20" value="C" class="form-radio h-5 w-5">
+                            <span>C. $H_2O$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q20" value="D" class="form-radio h-5 w-5">
+                            <span>D. $CH_4$</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Biology Quiz Section (Hidden by default) -->
+            <div id="biology-quiz-section" class="quiz-section space-y-6 hidden">
+                <!-- Question 1 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">1. What is the powerhouse of the cell?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q21" value="A" class="form-radio h-5 w-5">
+                            <span>A. Nucleus</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q21" value="B" class="form-radio h-5 w-5">
+                            <span>B. Mitochondria</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q21" value="C" class="form-radio h-5 w-5">
+                            <span>C. Ribosome</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q21" value="D" class="form-radio h-5 w-5">
+                            <span>D. Cytoplasm</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 2 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">2. Which part of a plant absorbs water and nutrients from the soil?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q22" value="A" class="form-radio h-5 w-5">
+                            <span>A. Leaves</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q22" value="B" class="form-radio h-5 w-5">
+                            <span>B. Stem</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q22" value="C" class="form-radio h-5 w-5">
+                            <span>C. Roots</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q22" value="D" class="form-radio h-5 w-5">
+                            <span>D. Flowers</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 3 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">3. What is the main function of red blood cells?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q23" value="A" class="form-radio h-5 w-5">
+                            <span>A. Fighting infection</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q23" value="B" class="form-radio h-5 w-5">
+                            <span>B. Carrying oxygen</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q23" value="C" class="form-radio h-5 w-5">
+                            <span>C. Clotting blood</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q23" value="D" class="form-radio h-5 w-5">
+                            <span>D. Producing antibodies</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 4 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">4. The process by which plants make their own food is called:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q24" value="A" class="form-radio h-5 w-5">
+                            <span>A. Respiration</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q24" value="B" class="form-radio h-5 w-5">
+                            <span>B. Photosynthesis</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q24" value="C" class="form-radio h-5 w-5">
+                            <span>C. Transpiration</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q24" value="D" class="form-radio h-5 w-5">
+                            <span>D. Fermentation</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 5 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">5. Which of the following is the universal blood donor type?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q25" value="A" class="form-radio h-5 w-5">
+                            <span>A. A+</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q25" value="B" class="form-radio h-5 w-5">
+                            <span>B. B-</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q25" value="C" class="form-radio h-5 w-5">
+                            <span>C. AB+</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q25" value="D" class="form-radio h-5 w-5">
+                            <span>D. O-</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 6 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">6. What is the largest organ in the human body?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q26" value="A" class="form-radio h-5 w-5">
+                            <span>A. Liver</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q26" value="B" class="form-radio h-5 w-5">
+                            <span>B. Heart</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q26" value="C" class="form-radio h-5 w-5">
+                            <span>C. Skin</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q26" value="D" class="form-radio h-5 w-5">
+                            <span>D. Lungs</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 7 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">7. Which of the following is responsible for storing genetic information?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q27" value="A" class="form-radio h-5 w-5">
+                            <span>A. DNA</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q27" value="B" class="form-radio h-5 w-5">
+                            <span>B. RNA</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q27" value="C" class="form-radio h-5 w-5">
+                            <span>C. Protein</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q27" value="D" class="form-radio h-5 w-5">
+                            <span>D. Lipids</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 8 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">8. What is the scientific study of plants?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q28" value="A" class="form-radio h-5 w-5">
+                            <span>A. Zoology</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q28" value="B" class="form-radio h-5 w-5">
+                            <span>B. Ecology</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q28" value="C" class="form-radio h-5 w-5">
+                            <span>C. Botany</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q28" value="D" class="form-radio h-5 w-5">
+                            <span>D. Geology</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 9 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">9. The process of cell division that results in two identical daughter cells is called:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q29" value="A" class="form-radio h-5 w-5">
+                            <span>A. Meiosis</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q29" value="B" class="form-radio h-5 w-5">
+                            <span>B. Mitosis</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q29" value="C" class="form-radio h-5 w-5">
+                            <span>C. Fertilization</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q29" value="D" class="form-radio h-5 w-5">
+                            <span>D. Translocation</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 10 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">10. The basic unit of life is the:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q30" value="A" class="form-radio h-5 w-5">
+                            <span>A. Atom</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q30" value="B" class="form-radio h-5 w-5">
+                            <span>B. Molecule</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q30" value="C" class="form-radio h-5 w-5">
+                            <span>C. Cell</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q30" value="D" class="form-radio h-5 w-5">
+                            <span>D. Organ</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- JEE Advanced Quiz Section (Hidden by default) -->
+            <div id="jee_advance-quiz-section" class="quiz-section space-y-6 hidden">
+                <!-- Question 1 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">1. A block of mass `m` is pushed up an inclined plane with angle $\theta$. The coefficient of static friction is $\mu_s$. The minimum force required to start the block moving up the plane is:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q31" value="A" class="form-radio h-5 w-5">
+                            <span>A. $mg(\sin\theta + \mu_s\cos\theta)$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q31" value="B" class="form-radio h-5 w-5">
+                            <span>B. $mg\sin\theta$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q31" value="C" class="form-radio h-5 w-5">
+                            <span>C. $mg(\cos\theta + \mu_s\sin\theta)$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q31" value="D" class="form-radio h-5 w-5">
+                            <span>D. $\mu_s mg\cos\theta$</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 2 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">2. If the momentum of a particle is increased by 20%, its kinetic energy will increase by:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q32" value="A" class="form-radio h-5 w-5">
+                            <span>A. 20%</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q32" value="B" class="form-radio h-5 w-5">
+                            <span>B. 40%</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q32" value="C" class="form-radio h-5 w-5">
+                            <span>C. 44%</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q32" value="D" class="form-radio h-5 w-5">
+                            <span>D. 10%</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 3 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">3. A body is projected vertically upwards with a velocity `u`. The time taken to reach the maximum height is:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q33" value="A" class="form-radio h-5 w-5">
+                            <span>A. $u/g$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q33" value="B" class="form-radio h-5 w-5">
+                            <span>B. $2u/g$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q33" value="C" class="form-radio h-5 w-5">
+                            <span>C. $u^2/2g$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q33" value="D" class="form-radio h-5 w-5">
+                            <span>D. $u^2/g$</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 4 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">4. The escape velocity from the surface of the Earth is approximately:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q34" value="A" class="form-radio h-5 w-5">
+                            <span>A. 8 km/s</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q34" value="B" class="form-radio h-5 w-5">
+                            <span>B. 11.2 km/s</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q34" value="C" class="form-radio h-5 w-5">
+                            <span>C. 11.2 m/s</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q34" value="D" class="form-radio h-5 w-5">
+                            <span>D. 12 km/s</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 5 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">5. For an ideal gas, the specific heat at constant volume is $C_v$ and at constant pressure is $C_p$. Which of the following is correct?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q35" value="A" class="form-radio h-5 w-5">
+                            <span>A. $C_p > C_v$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q35" value="B" class="form-radio h-5 w-5">
+                            <span>B. $C_p < C_v$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q35" value="C" class="form-radio h-5 w-5">
+                            <span>C. $C_p = C_v$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q35" value="D" class="form-radio h-5 w-5">
+                            <span>D. $C_p - C_v = 0$</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 6 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">6. The half-life of a radioactive substance is 10 days. After 40 days, the fraction of the original sample remaining will be:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q36" value="A" class="form-radio h-5 w-5">
+                            <span>A. $1/4$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q36" value="B" class="form-radio h-5 w-5">
+                            <span>B. $1/8$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q36" value="C" class="form-radio h-5 w-5">
+                            <span>C. $1/16$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q36" value="D" class="form-radio h-5 w-5">
+                            <span>D. $1/32$</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 7 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">7. The phenomenon of light bending as it passes from one medium to another is called:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q37" value="A" class="form-radio h-5 w-5">
+                            <span>A. Diffraction</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q37" value="B" class="form-radio h-5 w-5">
+                            <span>B. Reflection</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q37" value="C" class="form-radio h-5 w-5">
+                            <span>C. Refraction</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q37" value="D" class="form-radio h-5 w-5">
+                            <span>D. Polarization</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 8 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">8. What is the magnetic field at the center of a circular coil of radius R carrying a current I?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q38" value="A" class="form-radio h-5 w-5">
+                            <span>A. $\mu_0 I/2R$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q38" value="B" class="form-radio h-5 w-5">
+                            <span>B. $\mu_0 I/R$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q38" value="C" class="form-radio h-5 w-5">
+                            <span>C. $\mu_0 I R/2$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q38" value="D" class="form-radio h-5 w-5">
+                            <span>D. $\mu_0 I^2/2R$</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 9 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">9. The work done by a force F on an object is given by the dot product of:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q39" value="A" class="form-radio h-5 w-5">
+                            <span>A. Force and velocity</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q39" value="B" class="form-radio h-5 w-5">
+                            <span>B. Force and acceleration</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q39" value="C" class="form-radio h-5 w-5">
+                            <span>C. Force and displacement</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q39" value="D" class="form-radio h-5 w-5">
+                            <span>D. Force and time</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 10 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">10. The maximum number of electrons that can be accommodated in a shell with principal quantum number 'n' is:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q40" value="A" class="form-radio h-5 w-5">
+                            <span>A. $n^2$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q40" value="B" class="form-radio h-5 w-5">
+                            <span>B. $2n^2$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q40" value="C" class="form-radio h-5 w-5">
+                            <span>C. $2n+2$</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q40" value="D" class="form-radio h-5 w-5">
+                            <span>D. $n^2+n$</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NEET Quiz Section (Hidden by default) -->
+            <div id="neet-quiz-section" class="quiz-section space-y-6 hidden">
+                <!-- Question 1 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">1. The largest number of chromosomes are found in:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q41" value="A" class="form-radio h-5 w-5">
+                            <span>A. Human</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q41" value="B" class="form-radio h-5 w-5">
+                            <span>B. Ophioglossum</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q41" value="C" class="form-radio h-5 w-5">
+                            <span>C. Gorilla</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q41" value="D" class="form-radio h-5 w-5">
+                            <span>D. Ascaris</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 2 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">2. Which of the following is a water-soluble vitamin?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q42" value="A" class="form-radio h-5 w-5">
+                            <span>A. Vitamin A</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q42" value="B" class="form-radio h-5 w-5">
+                            <span>B. Vitamin D</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q42" value="C" class="form-radio h-5 w-5">
+                            <span>C. Vitamin K</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q42" value="D" class="form-radio h-5 w-5">
+                            <span>D. Vitamin C</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 3 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">3. The main component of the cell wall of fungi is:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q43" value="A" class="form-radio h-5 w-5">
+                            <span>A. Pectin</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q43" value="B" class="form-radio h-5 w-5">
+                            <span>B. Cellulose</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q43" value="C" class="form-radio h-5 w-5">
+                            <span>C. Chitin</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q43" value="D" class="form-radio h-5 w-5">
+                            <span>D. Lignin</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 4 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">4. The site of cellular respiration in a eukaryotic cell is:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q44" value="A" class="form-radio h-5 w-5">
+                            <span>A. Cytoplasm</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q44" value="B" class="form-radio h-5 w-5">
+                            <span>B. Nucleus</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q44" value="C" class="form-radio h-5 w-5">
+                            <span>C. Mitochondria</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q44" value="D" class="form-radio h-5 w-5">
+                            <span>D. Chloroplast</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 5 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">5. Which of the following is a greenhouse gas?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q45" value="A" class="form-radio h-5 w-5">
+                            <span>A. Oxygen</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q45" value="B" class="form-radio h-5 w-5">
+                            <span>B. Nitrogen</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q45" value="C" class="form-radio h-5 w-5">
+                            <span>C. Methane</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q45" value="D" class="form-radio h-5 w-5">
+                            <span>D. Argon</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 6 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">6. The process of converting atmospheric nitrogen into ammonia is called:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q46" value="A" class="form-radio h-5 w-5">
+                            <span>A. Nitrification</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q46" value="B" class="form-radio h-5 w-5">
+                            <span>B. Denitrification</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q46" value="C" class="form-radio h-5 w-5">
+                            <span>C. Nitrogen fixation</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q46" value="D" class="form-radio h-5 w-5">
+                            <span>D. Ammonification</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 7 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">7. The hormone that regulates blood sugar levels is:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q47" value="A" class="form-radio h-5 w-5">
+                            <span>A. Thyroxine</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q47" value="B" class="form-radio h-5 w-5">
+                            <span>B. Adrenaline</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q47" value="C" class="form-radio h-5 w-5">
+                            <span>C. Insulin</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q47" value="D" class="form-radio h-5 w-5">
+                            <span>D. Estrogen</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 8 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">8. Which of the following diseases is caused by a virus?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q48" value="A" class="form-radio h-5 w-5">
+                            <span>A. Typhoid</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q48" value="B" class="form-radio h-5 w-5">
+                            <span>B. Tuberculosis</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q48" value="C" class="form-radio h-5 w-5">
+                            <span>C. Polio</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q48" value="D" class="form-radio h-5 w-5">
+                            <span>D. Malaria</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 9 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">9. The male reproductive part of a flower is the:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q49" value="A" class="form-radio h-5 w-5">
+                            <span>A. Pistil</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q49" value="B" class="form-radio h-5 w-5">
+                            <span>B. Stamen</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q49" value="C" class="form-radio h-5 w-5">
+                            <span>C. Sepal</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q49" value="D" class="form-radio h-5 w-5">
+                            <span>D. Petal</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 10 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">10. The study of the interactions between living organisms and their environment is:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q50" value="A" class="form-radio h-5 w-5">
+                            <span>A. Ecology</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q50" value="B" class="form-radio h-5 w-5">
+                            <span>B. Ethology</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q50" value="C" class="form-radio h-5 w-5">
+                            <span>C. Anatomy</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q50" value="D" class="form-radio h-5 w-5">
+                            <span>D. Physiology</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UPSC Quiz Section (Hidden by default) -->
+            <div id="upsc-quiz-section" class="quiz-section space-y-6 hidden">
+                <!-- Question 1 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">1. Which planet is known as the "Red Planet"?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q51" value="A" class="form-radio h-5 w-5">
+                            <span>A. Jupiter</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q51" value="B" class="form-radio h-5 w-5">
+                            <span>B. Mars</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q51" value="C" class="form-radio h-5 w-5">
+                            <span>C. Saturn</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q51" value="D" class="form-radio h-5 w-5">
+                            <span>D. Venus</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 2 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">2. Which of the following is a non-renewable resource?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q52" value="A" class="form-radio h-5 w-5">
+                            <span>A. Solar energy</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q52" value="B" class="form-radio h-5 w-5">
+                            <span>B. Wind energy</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q52" value="C" class="form-radio h-5 w-5">
+                            <span>C. Natural gas</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q52" value="D" class="form-radio h-5 w-5">
+                            <span>D. Hydropower</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 3 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">3. What is the primary cause of acid rain?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q53" value="A" class="form-radio h-5 w-5">
+                            <span>A. Ozone depletion</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q53" value="B" class="form-radio h-5 w-5">
+                            <span>B. Greenhouse effect</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q53" value="C" class="form-radio h-5 w-5">
+                            <span>C. Emission of sulfur and nitrogen oxides</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q53" value="D" class="form-radio h-5 w-5">
+                            <span>D. Deforestation</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 4 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">4. The instrument used to measure atmospheric pressure is a:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q54" value="A" class="form-radio h-5 w-5">
+                            <span>A. Hydrometer</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q54" value="B" class="form-radio h-5 w-5">
+                            <span>B. Barometer</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q54" value="C" class="form-radio h-5 w-5">
+                            <span>C. Thermometer</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q54" value="D" class="form-radio h-5 w-5">
+                            <span>D. Anemometer</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 5 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">5. Which of the following is not a part of the UN's Sustainable Development Goals (SDGs)?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q55" value="A" class="form-radio h-5 w-5">
+                            <span>A. No Poverty</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q55" value="B" class="form-radio h-5 w-5">
+                            <span>B. Zero Hunger</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q55" value="C" class="form-radio h-5 w-5">
+                            <span>C. World Peace</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q55" value="D" class="form-radio h-5 w-5">
+                            <span>D. Clean Water and Sanitation</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 6 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">6. What is the main function of the Reserve Bank of India (RBI)?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q56" value="A" class="form-radio h-5 w-5">
+                            <span>A. Regulating stock markets</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q56" value="B" class="form-radio h-5 w-5">
+                            <span>B. Issuing currency and controlling monetary policy</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q56" value="C" class="form-radio h-5 w-5">
+                            <span>C. Providing loans to individuals</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q56" value="D" class="form-radio h-5 w-5">
+                            <span>D. Managing government finances</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 7 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">7. The term "E-waste" refers to:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q57" value="A" class="form-radio h-5 w-5">
+                            <span>A. Waste from electricity generation</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q57" value="B" class="form-radio h-5 w-5">
+                            <span>B. Electronic waste</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q57" value="C" class="form-radio h-5 w-5">
+                            <span>C. Environmental waste</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q57" value="D" class="form-radio h-5 w-5">
+                            <span>D. Waste from e-commerce</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 8 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">8. The Preamble to the Constitution of India defines the objectives of the Indian Republic as:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q58" value="A" class="form-radio h-5 w-5">
+                            <span>A. Justice, Liberty, Equality, Fraternity</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q58" value="B" class="form-radio h-5 w-5">
+                            <span>B. Democracy, Socialism, Secularism</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q58" value="C" class="form-radio h-5 w-5">
+                            <span>C. Unity, Integrity, Sovereignty</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q58" value="D" class="form-radio h-5 w-5">
+                            <span>D. Republicanism, Federalism, Socialism</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 9 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">9. Which of the following is the deepest ocean trench on Earth?</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q59" value="A" class="form-radio h-5 w-5">
+                            <span>A. Puerto Rico Trench</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q59" value="B" class="form-radio h-5 w-5">
+                            <span>B. Java Trench</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q59" value="C" class="form-radio h-5 w-5">
+                            <span>C. Mariana Trench</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q59" value="D" class="form-radio h-5 w-5">
+                            <span>D. Cayman Trench</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Question 10 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-lime-500">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">10. The largest volcano on Earth is:</p>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q60" value="A" class="form-radio h-5 w-5">
+                            <span>A. Mauna Loa</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q60" value="B" class="form-radio h-5 w-5">
+                            <span>B. Mount Vesuvius</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q60" value="C" class="form-radio h-5 w-5">
+                            <span>C. Mount Fuji</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-gray-600">
+                            <input type="radio" name="q60" value="D" class="form-radio h-5 w-5">
+                            <span>D. Mount Etna</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-center mt-8">
+                <button type="submit" class="bg-lime-500 hover:bg-lime-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+                    Submit Quiz
+                </button>
+            </div>
+        </form>
+
+        <!-- Result Modal -->
+        <div id="result-modal" class="modal">
+            <div class="modal-content shadow-lg">
+                <span class="close text-gray-500 hover:text-gray-900">&times;</span>
+                <h2 class="text-2xl font-bold mb-4 text-gray-800">Your Score</h2>
+                <p id="score-text" class="text-xl font-medium text-gray-700 mb-4">You scored 0 out of 10.</p>
+                <div id="correct-answers" class="text-left"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Define all quizzes and their correct answers
+        const quizzes = {
+            'physics': {
+                title: 'Physics Multiple-Choice Questions',
+                answers: ['B', 'B', 'C', 'C', 'B', 'D', 'B', 'C', 'C', 'B'],
+                questionNames: ['q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10']
+            },
+            'math': {
+                title: 'Math Multiple-Choice Questions',
+                answers: ['A', 'A', 'A', 'A', 'B', 'C', 'A', 'C', 'B', 'B'],
+                questionNames: ['q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10']
+            },
+            'chemistry': {
+                title: 'Chemistry Multiple-Choice Questions',
+                answers: ['B', 'B', 'C', 'A', 'C', 'D', 'A', 'C', 'B', 'C'],
+                questionNames: ['q11', 'q12', 'q13', 'q14', 'q15', 'q16', 'q17', 'q18', 'q19', 'q20']
+            },
+            'biology': {
+                title: 'Biology Multiple-Choice Questions',
+                answers: ['B', 'C', 'B', 'B', 'D', 'C', 'A', 'C', 'B', 'C'],
+                questionNames: ['q21', 'q22', 'q23', 'q24', 'q25', 'q26', 'q27', 'q28', 'q29', 'q30']
+            },
+            'jee_advance': {
+                title: 'JEE Advanced Multiple-Choice Questions',
+                answers: ['A', 'C', 'A', 'B', 'A', 'C', 'C', 'A', 'C', 'B'],
+                questionNames: ['q31', 'q32', 'q33', 'q34', 'q35', 'q36', 'q37', 'q38', 'q39', 'q40']
+            },
+            'neet': {
+                title: 'NEET Multiple-Choice Questions',
+                answers: ['B', 'D', 'C', 'C', 'C', 'C', 'C', 'C', 'B', 'A'],
+                questionNames: ['q41', 'q42', 'q43', 'q44', 'q45', 'q46', 'q47', 'q48', 'q49', 'q50']
+            },
+            'upsc': {
+                title: 'UPSC Multiple-Choice Questions',
+                answers: ['B', 'C', 'C', 'B', 'C', 'B', 'B', 'A', 'C', 'A'],
+                questionNames: ['q51', 'q52', 'q53', 'q54', 'q55', 'q56', 'q57', 'q58', 'q59', 'q60']
+            }
+        };
+
+        let currentQuiz = 'physics';
+
+        function showQuiz(quizId) {
+            // Hide all quiz sections
+            document.querySelectorAll('.quiz-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            // Show the selected quiz section
+            document.getElementById(quizId + '-quiz-section').classList.remove('hidden');
+
+            // Update title
+            document.getElementById('quiz-title').innerText = quizzes[quizId].title;
+
+            // Update active state of buttons
+            document.querySelectorAll('.subject-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            currentQuiz = quizId;
+        }
+
+        function submitQuiz(event) {
+            event.preventDefault();
+
+            const form = document.getElementById('quizForm');
+            const userAnswers = {};
+            quizzes[currentQuiz].questionNames.forEach(qName => {
+                const checked = form.querySelector(`input[name="${qName}"]:checked`);
+                userAnswers[qName] = checked ? checked.value : null;
+            });
+            
+            let score = 0;
+            let totalQuestions = quizzes[currentQuiz].answers.length;
+            let correctAnswersHtml = '';
+            
+            const selectedAnswers = Object.values(userAnswers);
+
+            // Check if all questions are answered
+            if (selectedAnswers.some(answer => answer === null)) {
+                // Use a modal for user feedback instead of an alert
+                const modal = document.getElementById('result-modal');
+                const scoreText = document.getElementById('score-text');
+                const correctAnswersDiv = document.getElementById('correct-answers');
+                
+                scoreText.innerHTML = "Please answer all questions before submitting.";
+                correctAnswersDiv.innerHTML = "";
+                modal.style.display = "block";
+                return;
+            }
+
+            // Calculate score
+            quizzes[currentQuiz].answers.forEach((correctAnswer, index) => {
+                const questionName = quizzes[currentQuiz].questionNames[index];
+                if (userAnswers[questionName] === correctAnswer) {
+                    score++;
+                }
+                const questionNumber = index + 1;
+                correctAnswersHtml += `<p><strong>Question ${questionNumber}:</strong> The correct answer is <strong>${correctAnswer}</strong>.</p>`;
+            });
+
+            // Display results in a modal
+            const modal = document.getElementById('result-modal');
+            const scoreText = document.getElementById('score-text');
+            const correctAnswersDiv = document.getElementById('correct-answers');
+            
+            scoreText.innerHTML = `You scored ${score} out of ${totalQuestions}!`;
+            correctAnswersDiv.innerHTML = correctAnswersHtml;
+            modal.style.display = "block";
+
+            // Get the <span> element that closes the modal
+            const span = document.getElementsByClassName("close")[0];
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
+
+        // Initialize quiz view on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            showQuiz('physics');
+        });
+    </script>
+</body>
+</html>

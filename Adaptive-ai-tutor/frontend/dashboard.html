@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Adaptive Tutor | Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">StudyHub</div>
+        <nav>
+    <ul>
+        <li><a href="app-menu.html"><span>☰</span> App Menu</a></li>
+        <li class="active"><a href="dashboard.html"><span>📚</span> Subjects</a></li>
+        <li><a href="quizzes.html"><span>📝</span> Quizzes</a></li>
+        <li><a href="leaderboards.html"><span>🏆</span> Leaderboards</a></li>
+        <li><a href="quests.html"><span>🎯</span> Quests</a></li>
+        <li><a href="shop.html"><span>🛒</span> Shop</a></li>
+        <li><a href="profile.html"><span>🙍</span> Profile</a></li>
+        <li><a href="more.html"><span>⋯</span> More</a></li>
+    </ul>
+</nav>
+    </aside>
+
+    <main>
+        <!-- Subjects Grid (Main) -->
+        <section class="subjects-grid">
+            <div class="subject-card">
+    <h3>📘 Physics</h3>
+    <p>Mechanics, Optics, Thermodynamics...</p>
+    <button class="start-btn" id="startPhysicsBtn">Start Physics</button>
+</div>
+<div class="subject-card">
+    <h3>📗 Mathematics</h3>
+    <p>Algebra, Calculus, Geometry...</p>
+    <button class="start-btn" id="startMathBtn">Start Math</button>
+</div>
+<div class="subject-card">
+    <h3>🧪 Chemistry</h3>
+    <p>Organic, Inorganic, Physical...</p>
+    <button class="start-btn" id="startChemistryBtn">Start Chemistry</button>
+</div>
+<div class="subject-card">
+    <h3>🧬 Biology</h3>
+    <p>Botany, Zoology, Genetics...</p>
+    <button class="start-btn" id="startBiologyBtn">Start Biology</button>
+</div>
+<div class="subject-card">
+    <h3>🎯 JEE (Advanced)</h3>
+    <p>Extreme level engineering entrance prep</p>
+    <button class="start-btn" id="startJEEBtn">Start JEE</button>
+</div>
+<div class="subject-card">
+    <h3>⚕️ NEET</h3>
+    <p>Medical entrance exam preparation</p>
+    <button class="start-btn" id="startNEETBtn">Start NEET</button>
+</div>
+<div class="subject-card">
+    <h3>🏛 UPSC</h3>
+    <p>Civil services & government exams</p>
+    <button class="start-btn" id="startUPSCBtn">Start UPSC</button>
+</div>
+        </section>
+
+        <!-- Right Panel -->
+        <aside class="right-panel">
+            <div class="card leaderboard">
+                <strong>Unlock Leaderboards!</strong>
+                <p>Complete 10 more lessons to start competing</p>
+            </div>
+            <div class="card quests">
+                <strong>Daily Quests</strong>
+                <div>Earn 10 XP <progress max="10" value="0"></progress></div>
+            </div>
+            <div class="card profile-prompt">
+                <strong>Create a profile to save your progress!</strong>
+                <button class="action green">Create a Profile</button>
+                <button class="action blue">Sign In</button>
+            </div>
+       ...
+<aside class="right-panel">
+    ...
+</aside>
+</main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Function to handle the redirection
+        function handleStartClick(url) {
+            window.location.href = url;
+        }
+
+        // Add event listeners to each button
+        // Here we use querySelectorAll to find all buttons with the class 'start-btn'
+        const startButtons = document.querySelectorAll('.start-btn');
+
+        // Loop through each button and add a click listener
+        startButtons.forEach(button => {
+            // Get the text from the button to determine the destination
+            const buttonText = button.innerText;
+
+            if (buttonText.includes("Physics")) {
+                button.addEventListener("click", () => handleStartClick("physics_page.html"));
+            } else if (buttonText.includes("Math")) {
+                button.addEventListener("click", () => handleStartClick("math_page.html"));
+            } else if (buttonText.includes("Chemistry")) {
+                button.addEventListener("click", () => handleStartClick("chemistry_page.html"));
+            } else if (buttonText.includes("Biology")) {
+                button.addEventListener("click", () => handleStartClick("biology_page.html"));
+            } else if (buttonText.includes("JEE")) {
+                button.addEventListener("click", () => handleStartClick("jee_page.html"));
+            } else if (buttonText.includes("NEET")) {
+                button.addEventListener("click", () => handleStartClick("neet_page.html"));
+            } else if (buttonText.includes("UPSC")) {
+                button.addEventListener("click", () => handleStartClick("upsc_page.html"));
+            }
+        });
+    });
+</script>
+</body>
+</html>

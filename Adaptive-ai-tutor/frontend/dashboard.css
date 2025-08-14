@@ -1,0 +1,491 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f5f8fa;
+    display: flex;
+}
+
+.sidebar {
+    width: 215px;
+    background: #f0f4ff;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+}
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: #58cc02;
+    text-align: center;
+}
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+.sidebar li {
+    padding: 15px 12px;
+    font-size: 1.09rem;
+    border-radius: 9px;
+    margin-bottom: 7px;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 10px;
+    transition: background 0.17s;
+}
+.sidebar li.active, .sidebar li:hover {
+    background: #e6ffcd;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    padding: 2.2rem 1.5rem 2rem 2rem;
+    gap: 30px;
+}
+
+.subjects-grid {
+    flex: 2;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 21px;
+    margin-bottom: 20px;
+}
+
+.subject-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 14px rgba(60, 120, 80, 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.subject-card h3 {
+    font-size: 1.16rem;
+    margin: 0 0 10px 0;
+}
+.subject-card p {
+    font-size: 0.98rem;
+    color: #555;
+    flex-grow: 1;
+}
+.subject-card .start-btn {
+    background: #58cc02;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    margin-top: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background 0.2s ease;
+}
+.subject-card .start-btn:hover {
+    background: #46a400;
+}
+
+.right-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 250px;
+}
+.card {
+    background: #fff;
+    padding: 1.2rem 1rem;
+    border-radius: 13px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    margin-bottom: 1rem;
+}
+.action {
+    margin: 8px 2px 0 0;
+    padding: 8px 18px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+.action.green { background: #58cc02; color: #fff; }
+.action.blue { background: #3777f0; color: #fff; }
+progress {
+    width: 100px;
+    accent-color: #58cc02;
+}
+
+@media (max-width: 1000px) {
+    .sidebar { display: none; }
+    main { flex-direction: column; padding: 1rem; }
+    .subjects-grid { grid-template-columns: 1fr; }
+}
+/* General Layout for Profile Page */
+.profile-main {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+    width: 100%;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    color: #a0a0a0;
+}
+
+.avatar-plus-icon {
+    font-size: 60px;
+    color: #ccc;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.edit-icon {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    padding: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.profile-info h1 {
+    margin: 0;
+    font-size: 28px;
+    color: #333;
+}
+
+.profile-info .username {
+    color: #666;
+    margin: 5px 0;
+}
+
+.profile-info .join-date {
+    font-size: 14px;
+    color: #999;
+}
+
+.follow-info a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Profile Content Cards */
+.profile-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profile-details-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.profile-details-card h2 {
+    margin: 0 0 15px 0;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-details-card h2 .view-all {
+    font-size: 12px;
+    font-weight: bold;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.stat-value {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.stat-label {
+    display: block;
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* Right Social Panel */
+.social-panel {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.tab-btn {
+    flex-grow: 1;
+    border: none;
+    background: none;
+    padding: 10px 0;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #999;
+}
+
+.tab-btn.active {
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
+}
+
+.social-content {
+    padding: 20px 0;
+    text-align: center;
+}
+
+.image-placeholder img {
+    max-width: 100%;
+    height: auto;
+}
+
+.social-text {
+    font-size: 14px;
+    color: #666;
+    margin: 15px 0;
+}
+
+.friend-options {
+    border-top: 1px solid #e0e0e0;
+    padding-top: 15px;
+}
+
+.friend-option-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.friend-option-item:hover {
+    background-color: #f0f0f0;
+}
+/* Quests Page Styles */
+.quests-main {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.quests-welcome-banner {
+    background-color: #8a2be2; /* Purple color from screenshot */
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.quests-welcome-banner::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+.quests-welcome-banner h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.quests-welcome-banner p {
+    margin: 5px 0 0;
+    font-size: 14px;
+}
+
+.banner-text {
+    z-index: 1;
+}
+
+.banner-image {
+    z-index: 1;
+}
+
+.quests-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.daily-quests-section {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.section-header h3 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.section-header .timer {
+    font-size: 14px;
+    color: #999;
+}
+
+.quest-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.quest-card.locked {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.quest-details {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quest-icon {
+    font-size: 24px;
+}
+
+.progress-bar-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+progress {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 150px;
+    height: 10px;
+    border-radius: 5px;
+}
+
+progress::-webkit-progress-bar {
+    background-color: #e0e0e0;
+    border-radius: 5px;
+}
+
+progress::-webkit-progress-value {
+    background-color: #5cb85c; /* Green color for progress */
+    border-radius: 5px;
+}
+
+.quests-right-panel .card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.monthly-challenges-card {
+    text-align: center;
+    position: relative;
+    padding: 30px;
+    overflow: hidden;
+    background-color: #e6f7ff; /* Light blue background */
+}
+
+.monthly-challenges-card h3 {
+    font-size: 18px;
+    margin-top: 0;
+}
+
+.monthly-challenges-card p {
+    font-size: 14px;
+    color: #666;
+}
+
+.start-lesson-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.challenge-image {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 100px;
+    height: 100px;
+    opacity: 0.5;
+    z-index: 0;
+}
